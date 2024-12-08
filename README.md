@@ -1,4 +1,4 @@
-# Fitness App
+# FitControl App
 Este repositório contém o código-fonte de um aplicativo de gerenciamento de treinos, desenvolvido com um backend em Laravel (PHP) e um frontend em React Native. O aplicativo permite aos usuários:
 - Registrar e gerenciar suas listas de treinos.
 - Controlar o tempo de cada treino (inserido manualmente na versão inicial).
