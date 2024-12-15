@@ -9,17 +9,21 @@ use Illuminate\Database\Eloquent\Model;
 class Treinos extends Model
 {
     use HasFactory;
-    protected $fillable = ['nome', 'cover'];
-    protected $appends = ['links'];
 
-    public function treinos()
-    {
-        return $this->hasMany(Treinos::class, 'treino_id');
-    }
+    // Campos permitidos para preenchimento
+    protected $fillable = ['nome', 'user_id', 'finalizado_em'];
+
+    // Campos adicionais (acessores)
+    protected $appends = ['links'];
 
     public function exercicios()
     {
-        return $this->hasMany(Exercicio::class, Treinos::class);
+        return $this->hasMany(TreinosExercicios::class, 'treino_id');
+    }
+
+    public function treinosRealizados()
+    {
+        return $this->hasMany(TreinosRealizados::class, 'treino_id');
     }
 
     protected static function booted()
@@ -29,21 +33,24 @@ class Treinos extends Model
         });
     }
 
+    /**
+     * Acessor para os links relacionados ao treino
+     */
     public function links(): Attribute
     {
         return new Attribute(
             get: fn () => [
                 [
                     'rel' => 'self',
-                    'url' => "/api/treinos/{$this->id}"
-                ],
-                [
-                    'rel' => 'treinos',
-                    'url' => "/api/treinos/{$this->id}/treinos"
+                    'url' => "/api/treinos/{$this->id}",
                 ],
                 [
                     'rel' => 'exercicios',
-                    'url' => "/api/treinos/{$this->id}/exercicios"
+                    'url' => "/api/treinos/{$this->id}/exercicios",
+                ],
+                [
+                    'rel' => 'treinos_realizados',
+                    'url' => "/api/treinos/{$this->id}/treinos_realizados",
                 ],
             ],
         );
