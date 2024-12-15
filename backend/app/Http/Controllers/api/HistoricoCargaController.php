@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\api\Controllers;
+namespace App\Http\Controllers\api;
 
 use App\Models\HistoricoCargas;
 use Illuminate\Http\Request;

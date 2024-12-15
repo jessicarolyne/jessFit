@@ -1,72 +1,77 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\api;
 
 use App\Models\Treinos;
 use Illuminate\Http\Request;
-
+use App\Http\Requests\TreinosFormRequest;
 class TreinosController extends Controller
 {
     //Listar todos os treinos de um usuário
-    public function index(Request $request)
+    public function index(TreinosFormRequest $request)
     {
-        $userId = $request->user()->id;
+        // Supõe que há um relacionamento entre treinos e usuários (user_id)
+        $user = $request->user(); // Obtém o usuário autenticado
 
-        return Treinos::where('user_id', $userId)
-            ->orderBy('criado_em', 'desc')
+        // Lista apenas os treinos do usuário autenticado
+        $treinos = Treinos::where('user_id', $user->id)
+            ->with('exercicios') // Carrega exercícios associados, se necessário
             ->get();
+
+        return response()->json($treinos);
     }
 
-    //Criar um novo treino
-    public function store(Request $request)
+    public function store(TreinosFormRequest $request)
     {
-        $request->validate([
-            'nome' => 'required|string|max:256',
-            'user_id' => 'required|exists:users,user_id',
+        $user = $request->user(); // Obtém o usuário autenticado
+
+        // Cria um novo treino associado ao usuário
+        $treino = Treinos::create([
+            'nome' => $request->validated('nome'), // Valida automaticamente
+            'user_id' => $user->id,
         ]);
 
-        return Treinos::create([
-            'nome' => $request->nome,
-            'user_id' => $request->user_id,
-            'criado_em' => now(),
-            'atualizado_em' => now(),
-        ]);
+        return response()->json($treino, 201); // Retorna o treino criado com status 201
     }
 
-    //Exibir detalhes de um treino específico
-    public function show($id)
+    public function show(TreinosFormRequest $request, $id)
     {
-        $treino = Treinos::findOrFail($id);
+        $user = $request->user();
 
-        // Carregar exercícios associados (opcional)
-        $treino->load('treinosExercicios.exercicio');
+        // Retorna apenas um treino que pertence ao usuário autenticado
+        $treino = Treinos::where('id', $id)
+            ->where('user_id', $user->id)
+            ->with('exercicios') // Carrega exercícios associados
+            ->firstOrFail();
 
-        return $treino;
+        return response()->json($treino);
     }
 
-    //Atualizar um treino
-    public function update(Request $request, $id)
+    public function update(TreinosFormRequest $request, $id)
     {
-        $treino = Treinos::findOrFail($id);
+        $user = $request->user();
 
-        $request->validate([
-            'nome' => 'sometimes|string|max:256',
-        ]);
+        // Atualiza apenas um treino que pertence ao usuário autenticado
+        $treino = Treinos::where('id', $id)
+            ->where('user_id', $user->id)
+            ->firstOrFail();
 
-        $treino->update([
-            'nome' => $request->nome ?? $treino->nome,
-            'atualizado_em' => now(),
-        ]);
+        $treino->update($request->validated()); // Usa os dados validados
 
-        return $treino;
+        return response()->json($treino); // Retorna o treino atualizado
     }
 
-    //Deletar um treino
-    public function destroy($id)
+    public function destroy(TreinosFormRequest $request, $id)
     {
-        $treino = Treinos::findOrFail($id);
+        $user = $request->user();
+
+        // Deleta apenas um treino que pertence ao usuário autenticado
+        $treino = Treinos::where('id', $id)
+            ->where('user_id', $user->id)
+            ->firstOrFail();
+
         $treino->delete();
 
-        return response()->noContent();
+        return response()->json(['message' => 'Treino removido com sucesso!']);
     }
 }

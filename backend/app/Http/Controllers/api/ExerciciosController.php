@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\api;
 
 use App\Models\Exercicios;
 use Illuminate\Http\Request;
+use App\Http\Requests\ExerciciosFormRequest;
 
 class ExerciciosController extends Controller
 {
@@ -12,10 +13,10 @@ class ExerciciosController extends Controller
         return Exercicios::all();
     }
 
-    public function store(Request $request)
+    public function store(ExerciciosFormRequest $request)
     {
-        $request->validate(['nome' => 'required|string|max:256']);
-        return Exercicios::create($request->all());
+        $exercicio = Exercicios::create($request->validated());
+        return response()->json($exercicio, 201);
     }
 
     public function update(Request $request, $id)
