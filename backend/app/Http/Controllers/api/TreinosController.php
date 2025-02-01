@@ -6,7 +6,7 @@ use App\Models\Treinos;
 use Illuminate\Http\Request;
 use App\Http\Requests\TreinosFormRequest;
 class TreinosController extends Controller
-{
+{ 
     //Listar todos os treinos de um usuário
     public function index(TreinosFormRequest $request)
     {
