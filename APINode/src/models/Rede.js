@@ -1,26 +1,10 @@
-import { Sequelize, DataTypes } from "sequelize";
-import conectaNaDatabase from "../config/dbConnect.js";
+import mongoose from "mongoose";
 
-const sequelize = await conectaNaDatabase();
+const redeSchema = new mongoose.Schema ({
+    id: { type: mongoose.Schema.Types.ObjectId },
+    nome: { type: String, required: true }
+}, { versionKey: false });
 
-const Rede = sequelize.define('Rede', {
-    id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
-    },
-    cnpj: {
-        type: DataTypes.STRING(),
-        allowNull: false,
-        unique: true
-    },
-    nome: {
-        type: DataTypes.STRING,
-        allowNull: false
-    }
-}, {
-    tableName: 'redes',
-    timestamps: false
-});
+const rede = mongoose.model("redes", redeSchema);
 
-export default Rede;
+export default rede;

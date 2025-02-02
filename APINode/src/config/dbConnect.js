@@ -1,19 +1,9 @@
-import { Sequelize } from 'sequelize';
+import mongoose, {mongo} from "mongoose";
 
 async function conectaNaDatabase() {
-  const sequelize = new Sequelize('2025_jessFit', 'root', '', {
-    host: 'localhost',
-    dialect: 'mysql'
-  });
-
-  try {
-    await sequelize.authenticate();
-    console.log('Conectado ao MySQL!');
-  } catch (error) {
-    console.error('Erro ao conectar ao MySQL:', error);
-  }
-
-  return sequelize;
+  mongoose.connect("mongodb+srv://admin:admin123@cluster0.0wy4b.mongodb.net/2025_jessfit?retryWrites=true&w=majority&appName=Cluster0");
+    
+  return mongoose.connection;
 }
 
 export default conectaNaDatabase;
