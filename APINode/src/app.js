@@ -1,5 +1,6 @@
 import express from "express";
 import conectaNaDatabase from "./config/dbConnect.js";
+import rede from "./models/Rede.js";
 
 const conexao = await conectaNaDatabase();
 
@@ -39,8 +40,9 @@ app.get("/", (req, res) => {
     res.status(200).send('Cheguei pessoal');
 });
 
-app.get("/redes", (req, res) => {
-    res.status(200).json(redes);
+app.get("/redes", async (req, res) => {
+    const listaRedes = await rede.find({});
+    res.status(200).json(listaRedes);
 })
 
 app.post("/redes", (req, res) => {
