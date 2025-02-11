@@ -30,27 +30,6 @@ const redes = [
     }
 ]
 
-function buscaLivros(id) {
-    return redes.findIndex(rede => {
-        return rede.id === Number(id);
-    })
-}
-
-app.post("/redes", (req, res) => {
-    redes.push(req.body);
-    res.status(201).send('Rede cadastrada com sucesso');
-})
-
-app.get("/redes/:id", (req, res) => {
-    const index = buscaLivros(req.params.id);
-    res.status(200).json(redes[index]);
-})
-
-app.put("/redes/:id", (req, res) => {
-    const index = buscaLivros(req.params.id);
-    redes[index].nome = req.body.nome;
-    res.status(200).json(redes);
-})
 
 app.delete("/redes/:id", (req, res) => {
     const index = buscaLivros(req.params.id);
