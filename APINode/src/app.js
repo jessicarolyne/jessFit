@@ -1,6 +1,6 @@
 import express from "express";
 import conectaNaDatabase from "./config/dbConnect.js";
-import rede from "./models/Rede.js";
+import routes from "./routes/index.js";
 
 const conexao = await conectaNaDatabase();
 
@@ -13,7 +13,7 @@ conexao.once("open", () => {
 })
 
 const app = express();
-app.use(express.json());
+routes(app);
 
 const redes = [
     {
@@ -35,15 +35,6 @@ function buscaLivros(id) {
         return rede.id === Number(id);
     })
 }
-//teste
-app.get("/", (req, res) => {
-    res.status(200).send('Cheguei pessoal');
-});
-
-app.get("/redes", async (req, res) => {
-    const listaRedes = await rede.find({});
-    res.status(200).json(listaRedes);
-})
 
 app.post("/redes", (req, res) => {
     redes.push(req.body);
