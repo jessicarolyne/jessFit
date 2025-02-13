@@ -12,9 +12,9 @@ class AcademiaController {
     }
 
     static async listarAcademiasPorRede(req, res) {
-        const nomerede = req.query.nomerede;
+        const nomerede = req.query.rede;
         try {
-            const academiasPorRede = await academia.find({ rede: nomerede });
+            const academiasPorRede = await academia.find({ "rede.nome":nomerede }); //Busca dentro do objeto Rede o campo nome
             res.status(200).json(academiasPorRede);
         } catch (error) {
             res.status(500).json({ message: `${error.message} - falha na busca` });
