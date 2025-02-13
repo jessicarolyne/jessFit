@@ -1,4 +1,4 @@
-import rede from "../models/Rede.js";
+import { rede } from "../models/Rede.js";
 
 class RedeController {
     static async listarRedes(req, res) {
