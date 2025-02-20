@@ -1,3 +1,4 @@
+import NaoEncontrado from "../erros/NaoEncontrado.js";
 import { rede } from "../models/Rede.js";
 
 class RedeController {
@@ -18,7 +19,7 @@ class RedeController {
             if(redeEncontrada != null) {
                 res.status(200).json(redeEncontrada);
             } else {
-                res.status(404).json({ message: "Id da rede não localizado" });
+               next(new NaoEncontrado("Id da rede não localizado"));
             }
         } catch (error) {
            next(error);
