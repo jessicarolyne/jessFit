@@ -1,10 +1,11 @@
 import express from "express";
 import conectaNaDatabase from "./config/dbConnect.js";
 import routes from "./routes/index.js";
+import manipuladorDeErros from "./middlewares/manipuladorDeErros.js";
 
 const conexao = await conectaNaDatabase();
 
-conexao.on("error", (erro) => {
+conexao.on("error", (erro) =>  {
   console.error("erro de conexão", erro);
 });
 
@@ -15,26 +16,6 @@ conexao.once("open", () => {
 const app = express();
 routes(app);
 
-const redes = [
-    {
-        id: 1,
-        nome: "Smart Fit"
-    },
-    {
-        id: 2,
-        nome: "Life Fit"
-    },
-    {
-        id: 3,
-        nome: "Ironberg"
-    }
-]
-
-
-app.delete("/redes/:id", (req, res) => {
-    const index = buscaLivros(req.params.id);
-    redes.splice(index, 1);
-    res.status(200).send("Rede excluida com sucesso");
-})
-
+// eslint-disable-next-line no-unused-vars
+app.use(manipuladorDeErros);
 export default app;
