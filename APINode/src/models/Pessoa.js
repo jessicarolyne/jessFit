@@ -7,7 +7,7 @@ const pessoaSchema =  new mongoose.Schema({
         required: [true, "O nome é obrigatório"]
     },
     user: {
-        type: mongoose.Schema.type.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "user",
         required: [true, "O nome de usuário é obrigatório"]
     },

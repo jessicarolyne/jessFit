@@ -11,7 +11,7 @@ const exercicioSchema =  new mongoose.Schema({
         required: false
     },
     tipo: {
-        type: mongoose.Schema.type.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "tipo",
         required: false
     }

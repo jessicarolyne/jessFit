@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-//import { redeSchema } from "./Rede.js";
 
 const academiaSchema =  new mongoose.Schema({
     id: { type: mongoose.Schema.Types.ObjectId},
@@ -12,7 +11,7 @@ const academiaSchema =  new mongoose.Schema({
         required: [true, "O nome da academia é obrigatório"]
     },
     rede: {
-        type: mongoose.Schema.type.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "rede",
         required: false,
         // redeSchema
