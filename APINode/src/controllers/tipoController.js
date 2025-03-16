@@ -50,3 +50,5 @@ class TipoController {
         }
     }
 }
+
+export default TipoController;
