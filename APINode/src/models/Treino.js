@@ -23,7 +23,7 @@ const treinoSchema = new mongoose.Schema({
         ref: "user",
         required: [true, "O usuário é obrigatório"]
     }
-});
+}, { versionKey: false });
 
 const treino = mongoose.model("treino", treinoSchema);
 

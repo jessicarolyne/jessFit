@@ -15,7 +15,7 @@ const exercicioSchema =  new mongoose.Schema({
         ref: "tipo",
         required: false
     }
-})
+}, { versionKey: false });
 
 const exercicio = mongoose.model("exercicios", exercicioSchema);
 

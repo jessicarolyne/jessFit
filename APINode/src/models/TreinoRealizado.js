@@ -16,7 +16,7 @@ const treinoRealizadoSchema =  new mongoose.Schema({
         required: [true, "O tempo de treino é obrigatório"],
         min: [1, "O tempo mínimo do treino deve ser 1 minuto"]
     },
-});
+}, { versionKey: false });
 
 const treinoRealizado = mongoose.model("treinosRealizados", treinoRealizadoSchema);
 

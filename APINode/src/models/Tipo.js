@@ -6,7 +6,7 @@ const tipoSchema = new mongoose.Schema({
         type: String,
         required: [true, "O nome é obrigatório"]
     }
-})
+}, { versionKey: false });
 
 const tipo = mongoose.model("tipos", tipoSchema);
 

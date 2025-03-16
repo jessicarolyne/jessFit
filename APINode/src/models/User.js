@@ -10,8 +10,8 @@ const userSchema =  new mongoose.Schema({
         type: String,
         required: [true, "A senha é obrigatória"]
     }
-});
+}, { versionKey: false });
 
-const user = mongoose.model("user", userSchema);
+const user = mongoose.model("users", userSchema);
 
-export {user, userSchema };
+export { user, userSchema };

@@ -16,7 +16,7 @@ const ExercicioRealizadoSchema =  new mongoose.Schema({
         type: Date,
         required: [true, "A data de registro é obrigatória"]
     }
-});
+}, { versionKey: false });
 
 const ExercicioRealizado =  mongoose.model("ExerciciosRealizados", ExercicioRealizadoSchema);
 

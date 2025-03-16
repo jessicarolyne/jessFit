@@ -11,7 +11,7 @@ const pessoaSchema =  new mongoose.Schema({
         ref: "user",
         required: [true, "O nome de usuário é obrigatório"]
     },
-});
+}, { versionKey: false });
 
 const pessoa = mongoose.model("pessoa", pessoaSchema);
 

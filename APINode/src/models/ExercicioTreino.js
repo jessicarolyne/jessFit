@@ -39,7 +39,7 @@ const exercicioTreinoSchema = new mongoose.Schema({
         ref: "treino",
         required: [true, "O treino é obrigatório"]
     }
-});
+}, { versionKey: false });
 
 const exercicioTreino = mongoose.model("exercicioTreino", exercicioTreinoSchema);
 
