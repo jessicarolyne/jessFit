@@ -22,17 +22,10 @@ class AcademiaController {
     }
 
     static async listarAcademiasPorFiltro(req, res, next) {
-        const { rede, nome } = req.query;
-
-        // const regex  = new RegExp(nome, 'i');
-        const busca = {};
-
-        if(rede) busca.rede = rede;
-        if(nome) busca.nome =  {$regex: nome, $options: 'i'};
-
         try {
-            const academiasPorRede = await academia.find(busca); 
-            res.status(200).json(academiasPorRede);
+            const busca = await processaBusca(req.query);
+            const academiasResults = await academia.find(busca).populate("rede"); 
+            res.status(200).json(academiasResults);
         } catch (error) {
             next(error);
         }
@@ -77,6 +70,20 @@ class AcademiaController {
             next(error);
         }
     }
+
 };
+ async function  processaBusca(params) {
+    const { nomeRede, nome } = params;
+    const busca = {};
+    if(nome) busca.nome =  {$regex: nome, $options: 'i'};
+    if(nomeRede) {
+        const buscarRede = await rede.findOne({ nome: nomeRede });
+        const redeId = buscarRede._id;
+        busca.buscarRede = redeId;
+    }
+    //gte = Greater Than or Equal = Maior ou igual que
+    //lte = Less Than or Equal = Menor ou igual que
+    return busca;
+}
 
 export default AcademiaController;
