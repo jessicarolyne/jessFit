@@ -21,6 +21,23 @@ class AcademiaController {
         }
     }
 
+    static async listarAcademiasPorFiltro(req, res, next) {
+        const { rede, nome } = req.query;
+
+        // const regex  = new RegExp(nome, 'i');
+        const busca = {};
+
+        if(rede) busca.rede = rede;
+        if(nome) busca.nome =  {$regex: nome, $options: 'i'};
+
+        try {
+            const academiasPorRede = await academia.find(busca); 
+            res.status(200).json(academiasPorRede);
+        } catch (error) {
+            next(error);
+        }
+    }
+
     static async listarAcademiaPorId(req, res, next) {
         try {
             const id = req.params.id;
