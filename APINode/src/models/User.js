@@ -8,7 +8,8 @@ const userSchema =  new mongoose.Schema({
     },
     password: {
         type: String,
-        required: [true, "A senha é obrigatória"]
+        required: [true, "A senha é obrigatória"],
+        min: [6, 'A senha deve conter mais de 6 caracteres']
     }
 }, { versionKey: false });
 

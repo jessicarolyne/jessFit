@@ -1,5 +1,5 @@
-import academia from "../models/Academia.js";
-import { rede } from "../models/Rede.js";
+import { academia } from "../models/index.js";
+import { rede } from "../models/index.js";
 
 class AcademiaController {
     static async listarAcademias(req, res, next) {
