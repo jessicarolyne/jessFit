@@ -1,4 +1,4 @@
-import user, { userSchema } from "../models/User.js";
+import { user } from "../models/index.js";
 
 class UserController {
     static async listarUsers(req, res, next) {

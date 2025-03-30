@@ -1,10 +1,9 @@
-import exercicio from "../models/Exercicio.js";
-import { tipo } from "../models/Tipo.js";
+import { exercicio, tipo } from "../models/index.js";
 
 class ExercicioController {
     static async listarExercicios(req, res, next) {
         try {
-            const listaExercicios = await exercicio.find({});
+            const listaExercicios = await exercicio.find().populate('tipo');
             res.status(200).json(listaExercicios);
         } catch (error) {
             next(error)

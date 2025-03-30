@@ -1,4 +1,4 @@
-import tipo from "../models/Tipo.js";
+import { tipo } from "../models/index.js";
 
 class TipoController {
     static async listarTipos(req, res, next) {

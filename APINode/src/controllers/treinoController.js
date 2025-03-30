@@ -1,10 +1,15 @@
-import treino from "../models/Treino.js";
-import { user } from "../models/User.js";
+import { treino, user } from "../models/index.js";
 
 class TreinoController {
     static async listarTreinos(req, res, next) {
         try {
-            const listaTreinos = await treino.find({});
+            // const { limite = 5, pagina = 1 } =  req.query;
+
+            const listaTreinos = await treino.find()
+            // .skip((pagina - 1) * limite)
+            // .limite(limite)
+            .populate('user')
+            .exec();
             res.status(200).json(listaTreinos);
         } catch (error) {
             next(error)

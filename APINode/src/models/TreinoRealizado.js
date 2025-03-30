@@ -4,7 +4,7 @@ const treinoRealizadoSchema =  new mongoose.Schema({
     id: { type: mongoose.Schema.Types.ObjectId },
     treino: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "treinos",
+        ref: "treino",
         required: [true, "O treino é obrigatório"]
     },
     dataExecucao: {

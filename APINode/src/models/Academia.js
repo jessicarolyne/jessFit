@@ -18,6 +18,6 @@ const academiaSchema =  new mongoose.Schema({
     }
 }, {versionKey: false});
 
-const academia = mongoose.model("academias", academiaSchema);
+const academia = mongoose.model("academia", academiaSchema);
 
 export default academia;

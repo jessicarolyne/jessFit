@@ -6,6 +6,9 @@ const userSchema =  new mongoose.Schema({
         type: String,
         required: [true, "O nome é obrigatório"]
     },
+    email: { type: String,
+        required: [true, "O e-mail é obrigatório"]
+    },
     password: {
         type: String,
         required: [true, "A senha é obrigatória"],
@@ -13,6 +16,6 @@ const userSchema =  new mongoose.Schema({
     }
 }, { versionKey: false });
 
-const user = mongoose.model("users", userSchema);
+const user = mongoose.model("user", userSchema);
 
 export { user, userSchema };

@@ -12,6 +12,6 @@ const tipoSchema = new mongoose.Schema({
     }
 }, { versionKey: false });
 
-const tipo = mongoose.model("tipos", tipoSchema);
+const tipo = mongoose.model("tipo", tipoSchema);
 
 export { tipo, tipoSchema };

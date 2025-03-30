@@ -5,6 +5,6 @@ const redeSchema = new mongoose.Schema({
     nome: { type: String, required: true },
 }, { versionKey: false });
 
-const rede = mongoose.model("redes", redeSchema);
+const rede = mongoose.model("rede", redeSchema);
 
 export { rede, redeSchema };

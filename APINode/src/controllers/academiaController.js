@@ -4,7 +4,7 @@ import { rede } from "../models/index.js";
 class AcademiaController {
     static async listarAcademias(req, res, next) {
         try {
-            const listaAcademias = await academia.find({});
+            const listaAcademias = await academia.find().populate('rede');
             res.status(200).json(listaAcademias);
         } catch (error) {
             next(error);

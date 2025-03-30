@@ -17,6 +17,6 @@ const exercicioSchema =  new mongoose.Schema({
     }
 }, { versionKey: false });
 
-const exercicio = mongoose.model("exercicios", exercicioSchema);
+const exercicio = mongoose.model("exercicio", exercicioSchema);
 
 export default exercicio;

@@ -28,6 +28,6 @@ const HistoricoDeCargasSchema =  new mongoose.Schema({
     }
 }, {versionKey: false});
 
-const HistoricoDeCarga = mongoose.model("HistoricoDeCargas", HistoricoDeCargasSchema);
+const HistoricoDeCarga = mongoose.model("historicoDeCargas", HistoricoDeCargasSchema);
 
 export default HistoricoDeCarga;
