@@ -8,10 +8,12 @@ import tipos from "./tipoRoutes.js";
 import exercicios from "./exercicioRoutes.js";
 import exerciciosTreinos from "./exercicioTreinoRoutes.js";
 import treinoRealizado from "./treinoRealizadoRoutes.js";
+import exercicioRealizado from "./exercicioRealizadoRoutes.js";
+import historicodeCargas from "./historicoDeCargasRoutes.js";
 
 const routes = (app) => {
     app.route("/").get((req, res) => res.status(200).send("Cheguei pessoal"));
-    app.use(express.json(), redes, academias, treinos, pessoas, users, tipos, exercicios, exerciciosTreinos, treinoRealizado);
+    app.use(express.json(), redes, academias, treinos, pessoas, users, tipos, exercicios, exerciciosTreinos, treinoRealizado, exercicioRealizado, historicodeCargas);
 };
 
 export default routes;
