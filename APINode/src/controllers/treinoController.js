@@ -1,16 +1,28 @@
+import NaoEncontrado from "../erros/NaoEncontrado.js";
+import RequisicaoIncorreta from "../erros/RequisicaoIncorreta.js";
 import { treino, user } from "../models/index.js";
 
 class TreinoController {
     static async listarTreinos(req, res, next) {
         try {
-            // const { limite = 5, pagina = 1 } =  req.query;
+            let { limite = 5, pagina = 1, ordenacao = "_id:-1" } =  req.query;
+            const [campoOrdenacao, ordem] = ordenacao.split(":");
+            limite = parseInt(limite);
+            pagina = parseInt(pagina);
+            ordem = parseInt(ordem);
 
-            const listaTreinos = await treino.find()
-            // .skip((pagina - 1) * limite)
-            // .limite(limite)
-            .populate('user')
-            .exec();
-            res.status(200).json(listaTreinos);
+            if(limite > 0  && pagina > 0) {
+                const listaTreinos = await treino.find()
+                .sort({ [campoOrdenacao]: ordem })
+                .skip((pagina - 1) * limite)
+                .limite(limite)
+                .populate('user')
+                .exec();
+                res.status(200).json(listaTreinos);
+            } else {
+                next(new RequisicaoIncorreta());
+            }
+
         } catch (error) {
             next(error)
         }
@@ -19,8 +31,12 @@ class TreinoController {
     static async listarTreinoPorId(req, res, next) {
         try {
             const id = req.params.id;
-            const treinoEncontrado = await treino.findById(id);
-            res.status(200).json(treinoEncontrado);
+            const treinoEncontrado = await treino.findById(id).populate('exercicio', 'user').exec();
+            if(treinoEncontrado != null) {
+                res.status(200).json(treinoEncontrado);
+            } else {
+                next(new NaoEncontrado("Id do treino não localizado"));
+            }
         } catch (error) {
             next(error)
         }
