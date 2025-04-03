@@ -4,10 +4,11 @@ import { rede } from "../models/index.js";
 class AcademiaController {
     static async listarAcademias(req, res, next) {
         try {
-            const listaAcademias = await academia.find().populate('rede');
-            res.status(200).json(listaAcademias);
+            const listaAcademias = academia.find();
+            req.resultado = listaAcademias;
+            next();
         } catch (error) {
-            next(error);
+            next(error)
         }
     }
 
@@ -24,7 +25,7 @@ class AcademiaController {
     static async listarAcademiasPorFiltro(req, res, next) {
         try {
             const busca = await processaBusca(req.query);
-            if(busca != null) {
+            if (busca != null) {
                 const academiasResults = await academia.find(busca).populate("rede");
                 res.status(200).json(academiasResults);
             } else {

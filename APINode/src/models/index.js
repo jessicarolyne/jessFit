@@ -8,7 +8,7 @@ import { tipo } from "./Tipo.js";
 import exercicio from "./Exercicio.js";
 import exercicioTreino from "./ExercicioTreino.js";
 import treinoRealizado from "./TreinoRealizado.js";
-import exercicioRealizado from "./ExercicioRealizadoRealizado.js";
+import exercicioRealizado from "./ExercicioRealizado.js";
 import HistoricoDeCarga from "./HistoricoDeCargas.js";
 
 export { academia, rede, treino, user, pessoa, tipo, exercicio, exercicioTreino, treinoRealizado, exercicioRealizado, HistoricoDeCarga };
