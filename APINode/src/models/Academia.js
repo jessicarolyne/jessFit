@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import autopopulate from "mongoose-autopopulate";
 
 const academiaSchema =  new mongoose.Schema({
     id: { type: mongoose.Schema.Types.ObjectId},
@@ -14,10 +15,11 @@ const academiaSchema =  new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "rede",
         required: false,
-        // redeSchema
+        autopopulate: true
     }
 }, {versionKey: false});
 
+academiaSchema.plugin(autopopulate);
 const academia = mongoose.model("academia", academiaSchema);
 
 export default academia;

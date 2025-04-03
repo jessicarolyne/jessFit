@@ -2,15 +2,15 @@ import { academia } from "../models/index.js";
 import { rede } from "../models/index.js";
 
 class AcademiaController {
-    static async listarAcademias(req, res, next) {
+    static listarAcademias = async (req, res, next) => {
         try {
-            const listaAcademias = academia.find();
-            req.resultado = listaAcademias;
+            const buscaAcademias = academia.find();
+            req.resultado = buscaAcademias;
             next();
-        } catch (error) {
-            next(error)
+        } catch (erro) {
+            next(erro);
         }
-    }
+    };
 
     static async listarAcademiasPorRede(req, res, next) {
         const nomerede = req.query.rede;
@@ -25,14 +25,17 @@ class AcademiaController {
     static async listarAcademiasPorFiltro(req, res, next) {
         try {
             const busca = await processaBusca(req.query);
-            if (busca != null) {
-                const academiasResults = await academia.find(busca).populate("rede");
-                res.status(200).json(academiasResults);
+
+            if (busca !== null) {
+                const academiasResultado = academia
+                    .find(busca)
+
+                res.status(200).send(academiasResultado);
             } else {
-                res.status(200).json([]);
+                res.status(200).send([]);
             }
-        } catch (error) {
-            next(error);
+        } catch (erro) {
+            next(erro);
         }
     }
 
