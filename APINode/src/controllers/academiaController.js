@@ -12,16 +12,6 @@ class AcademiaController {
         }
     };
 
-    static async listarAcademiasPorRede(req, res, next) {
-        const nomerede = req.query.rede;
-        try {
-            const academiasPorRede = await academia.find({ "rede.nome": nomerede }); //Busca dentro do objeto Rede o campo nome
-            res.status(200).json(academiasPorRede);
-        } catch (error) {
-            next(error);
-        }
-    }
-
     static async listarAcademiasPorFiltro(req, res, next) {
         try {
             const busca = await processaBusca(req.query);
@@ -30,7 +20,9 @@ class AcademiaController {
                 const academiasResultado = academia
                     .find(busca)
 
-                res.status(200).send(academiasResultado);
+                req.resultado = academiasResultado;
+
+                next();
             } else {
                 res.status(200).send([]);
             }
