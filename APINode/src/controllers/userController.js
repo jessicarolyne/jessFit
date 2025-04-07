@@ -3,10 +3,11 @@ import { user } from "../models/index.js";
 class UserController {
     static async listarUsers(req, res, next) {
         try {
-            const listaUsers = await user.find({});
-            res.status(200).json(listaUsers);
+            const buscaUser = user.find();
+            req.resultado = buscaUser;
+            next();
         } catch (error) {
-            next(error);
+            next(error)
         }
     }
 

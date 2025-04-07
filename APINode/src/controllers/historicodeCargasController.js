@@ -3,11 +3,12 @@ import { HistoricoDeCarga, exercicioTreino } from "../models/index.js";
 class HistoricodeCargasController {
     static async listarHistoricodeCargas(req, res, next) {
         try {
-            const listaHistoricodeCargas = await HistoricoDeCarga.find().populate('exercicioTreino');
-            res.status(200).json(listaHistoricodeCargas);
-        } catch (error) {
-            next(error)
-        }
+                   const buscaHistoricoDeCargas = HistoricoDeCarga.find();
+                   req.resultado = buscaHistoricoDeCargas;
+                   next();
+               } catch (error) {
+                   next(error)
+               }
     }
 
     static async listarHistoricodeCargasPorId(req, res, next) {

@@ -4,11 +4,12 @@ import { user } from "../models/User.js";
 class PessoaController {
     static async listarPessoas(req, res, next) {
         try {
-            const listarPessoas = await pessoa.find().populate('user').populate('academia');
-            res.status(200).json(listarPessoas);
-        } catch (error) {
-            next(error);
-        }
+                   const buscaPessoa = pessoa.find();
+                   req.resultado = buscaPessoa;
+                   next();
+               } catch (error) {
+                   next(error)
+               }
     }
 
     static async listarPessoaPorId(req, res, next) {

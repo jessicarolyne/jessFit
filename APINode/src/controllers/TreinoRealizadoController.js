@@ -3,8 +3,9 @@ import { treino, treinoRealizado } from "../models/index.js";
 class TreinoRealizadoController {
     static async listarTreinosRealizados(req, res, next) {
         try {
-            const listaTreinosRealizados = await treinoRealizado.find().populate('treino');
-            res.status(200).json(listaTreinosRealizados);
+            const buscaTreinoRealizado = treinoRealizado.find();
+            req.resultado = buscaTreinoRealizado;
+            next();
         } catch (error) {
             next(error)
         }

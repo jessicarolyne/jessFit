@@ -3,8 +3,9 @@ import { exercicioRealizado, treino, exercicio } from "../models/index.js";
 class ExercicioRealizadoController {
     static async listarExercicioRealizado(req, res, next) {
         try {
-            const listaExercicioRealizado = await exercicioRealizado.find().populate('treino').populate('exercicio');
-            res.status(200).json(listaExercicioRealizado);
+            const buscaExercicioRealizado = exercicioRealizado.find();
+            req.resultado = buscaExercicioRealizado;
+            next();
         } catch (error) {
             next(error)
         }

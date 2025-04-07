@@ -70,8 +70,8 @@ class AcademiaController {
             next(error);
         }
     }
-
 };
+
 async function processaBusca(params) {
     const { nomeRede, nome } = params;
     let busca = {};

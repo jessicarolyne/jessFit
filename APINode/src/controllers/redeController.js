@@ -4,10 +4,11 @@ import { rede } from "../models/Rede.js";
 class RedeController {
     static async listarRedes(req, res, next) {
         try {
-            const listaRedes = await rede.find({});
-            res.status(200).json(listaRedes);
+            const buscaRede = rede.find();
+            req.resultado = buscaRede;
+            next();
         } catch (error) {
-            next(error);
+            next(error)
         }
     }
 

@@ -3,8 +3,9 @@ import { exercicio, tipo } from "../models/index.js";
 class ExercicioController {
     static async listarExercicios(req, res, next) {
         try {
-            const listaExercicios = await exercicio.find().populate('tipo');
-            res.status(200).json(listaExercicios);
+            const buscaExercicios = exercicio.find();
+            req.resultado = buscaExercicios;
+            next();
         } catch (error) {
             next(error)
         }
@@ -23,7 +24,7 @@ class ExercicioController {
     static async listarExerciciosPorTreino(req, res, next) {
         const idTreino = req.query.treino;
         try {
-            const listaExercicios = await exercicio.find({"treino.id": idTreino});
+            const listaExercicios = await exercicio.find({ "treino.id": idTreino });
             res.status(200).json(listaExercicios);
         } catch (error) {
             next(error)
@@ -34,7 +35,7 @@ class ExercicioController {
         const newExercicio = req.body;
         try {
             const tipoEncontrado = await tipo.findById(newExercicio.tipo);
-            const exercicioCompleto = { ...newExercicio, tipo: { ...tipoEncontrado._doc }};
+            const exercicioCompleto = { ...newExercicio, tipo: { ...tipoEncontrado._doc } };
             await exercicio.create(exercicioCompleto);
             res.status(201).json({ message: "Criado com sucesso!", exercicio: newExercicio });
         } catch (error) {
@@ -46,7 +47,7 @@ class ExercicioController {
         try {
             const id = req.params.id;
             await exercicio.findByIdAndUpdate(id, req.body);
-            res.status(200).json({message: "Exercicio atualizado!"});
+            res.status(200).json({ message: "Exercicio atualizado!" });
         } catch (error) {
             next(error);
         }
@@ -56,7 +57,7 @@ class ExercicioController {
         try {
             const id = req.params.id;
             await exercicio.findByIdAndDelete(id, req.body);
-            res.status(200).json({message: "Exercicio excluido!"});
+            res.status(200).json({ message: "Exercicio excluido!" });
         } catch (error) {
             next(error);
         }

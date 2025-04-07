@@ -1,9 +1,10 @@
 import express from "express";
 import exercicioRealizadoController from "../controllers/exercicioRealizadoController.js";
+import paginar from "../middlewares/paginar.js";
 
 const routes = express.Router();
 
-routes.get("/exercicioRealizado", exercicioRealizadoController.listarExercicioRealizado);
+routes.get("/exercicioRealizado", exercicioRealizadoController.listarExercicioRealizado, paginar);
 routes.get("/exercicioRealizado/busca", exercicioRealizadoController.listarExercicioRealizadoPorExercicioTreino);
 routes.get("/exercicioRealizado/:id", exercicioRealizadoController.listarExercicioRealizadoPorId);
 routes.post("/exercicioRealizado", exercicioRealizadoController.cadastrarExercicioRealizado);
