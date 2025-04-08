@@ -1,5 +1,5 @@
 import express from "express";
-import TreinoRealizadoController from "../controllers/TreinoRealizadoController.js";
+import TreinoRealizadoController from "../controllers/treinoRealizadoController.js";
 import paginar from "../middlewares/paginar.js";
 
 const routes = express.Router();
