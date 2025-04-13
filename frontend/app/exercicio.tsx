@@ -1,22 +1,17 @@
 import { LinearGradient } from 'expo-linear-gradient';
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
-import treinosData from '../data/treinos.json';
+import { StyleSheet, Text, View } from 'react-native';
+// import exercicioData from '../data/exercicio.json';
 import { router } from 'expo-router';
 
-const Treinos = () => {
-    // console.log(treinosData);
+const Exercicio = () => {
     return (
         <LinearGradient
             colors={["#021123", "#021123"]}
             style={style.container}
         >
-            <Text style={style.titulo}>Seus treinos</Text>
-            {treinosData.map(treino => (
-                <TouchableOpacity onPress={() => { router.push('/exercicios') }} style={style.card}>
-                    <Text style={style.textCard}>{treino.nome}</Text>
-                    <Text style={style.data}>Criado em: { Intl.DateTimeFormat('pt-BR').format(new Date(treino.criadoEm)) }</Text>
-                </TouchableOpacity>
-            ))}
+                <View style={style.card}>
+                    
+                </View>
         </LinearGradient>
     );
 }
@@ -56,4 +51,4 @@ const style = StyleSheet.create({
         fontFamily: "Montserrat_500Medium",
     }
 })
-export default Treinos;
+export default Exercicio;

@@ -1,21 +1,26 @@
 import { LinearGradient } from 'expo-linear-gradient';
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
-import treinosData from '../data/treinos.json';
-import { router } from 'expo-router';
+import { StyleSheet, Text, View, Image } from 'react-native';
+import exerciciosData from '../data/listaExercicios.json';
+// import FastImage from 'react-native-fast-image';
 
-const Treinos = () => {
-    // console.log(treinosData);
+const Exercicios = () => {
+    console.log(exerciciosData);
     return (
         <LinearGradient
             colors={["#021123", "#021123"]}
             style={style.container}
         >
             <Text style={style.titulo}>Seus treinos</Text>
-            {treinosData.map(treino => (
-                <TouchableOpacity onPress={() => { router.push('/exercicios') }} style={style.card}>
-                    <Text style={style.textCard}>{treino.nome}</Text>
-                    <Text style={style.data}>Criado em: { Intl.DateTimeFormat('pt-BR').format(new Date(treino.criadoEm)) }</Text>
-                </TouchableOpacity>
+            {exerciciosData.map(exercicio => (
+                <View style={style.card}>
+                    <Text style={style.textCard}>{exercicio.nome}</Text>
+                    <Image style={style.imagem} source={{ uri: exercicio.imagem }} />
+                    {/* <FastImage
+                        style={style.imagem}
+                        source={{uri: exercicio.imagem}}
+                        resizeMode={FastImage.resizeMode.contain}
+                    /> */}
+                </View>
             ))}
         </LinearGradient>
     );
@@ -28,6 +33,11 @@ const style = StyleSheet.create({
         paddingHorizontal: 20,
         alignItems: 'center',
         gap: 20,
+    },
+    imagem: {
+        objectFit: "contain",
+        width: 250,
+        height: 250
     },
     titulo: {
         color: "#FFF",
@@ -56,4 +66,4 @@ const style = StyleSheet.create({
         fontFamily: "Montserrat_500Medium",
     }
 })
-export default Treinos;
+export default Exercicios;

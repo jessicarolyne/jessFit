@@ -1,0 +1,18 @@
+[
+    {
+        "_id": "67e9d0d9d42b9eed4d0b5ee3",
+        "nome": "Quadriceps",
+        "criadoEm": "2025-03-30T00:00:00.000Z",
+        "atualizadoEm": null,
+        "finalizadoEm": null,
+        "user": "67e9c2972ff34982fff069af"
+    },
+    {
+        "_id": "67fc0015342a61a3332a4453",
+        "nome": "Posterior",
+        "criadoEm": "2025-04-13T00:00:00.000Z",
+        "atualizadoEm": null,
+        "finalizadoEm": null,
+        "user": "67e9c2972ff34982fff069af"
+    }
+]

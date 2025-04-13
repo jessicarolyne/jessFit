@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import MaterialIcon from "@expo/vector-icons/MaterialIcons";
 import { useRouter } from "expo-router";
@@ -7,10 +7,12 @@ export default function Index() {
   const router = useRouter();
   return (
     <LinearGradient
-      colors={["#1A1A1D", "#000000"]}
+      colors={["#021123", "#021123"]}
       style={style.container}
     >
+      <Text style={style.subtitulo}>Welcome to</Text>
       <Text style={style.text}>JessFit</Text>
+      <Image style={style.imagem} source={require('../assets/images/musculacao.png')} />
       <TouchableOpacity onPress={() => {
         router.push('/treinos')
       }} style={style.button}>
@@ -28,15 +30,25 @@ const style = StyleSheet.create({
     alignItems: 'center',
     gap: 20,
   },
+  subtitulo: {
+    fontFamily: "Montserrat_700Bold",
+    fontSize:15,
+    color: '#98A0AB',
+  },
   text: {
     fontFamily: "MontSerrat_700Bold",
     fontSize: 30,
     color: '#FFF',
   },
+  imagem: {
+    objectFit: "contain",
+    width: 250,
+    height: 250
+  },
   button: {
     width: "80%",
     height: 50,
-    backgroundColor: "rgba(217, 217, 217, 0.3)",
+    backgroundColor: "#98A0AB",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -48,5 +60,6 @@ const style = StyleSheet.create({
     color: "#01080E",
     fontSize: 20,
     fontWeight: "600",
+    paddingBottom: 5
   },
 });
