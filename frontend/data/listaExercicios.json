@@ -2,7 +2,7 @@
     {
         "_id": "67e9cfd11df643c63189a6ca",
         "nome": "Leg Press",
-        "imagem": "https://github.com/jessicarolyne/jessFit/blob/main/frontend/uploads/legpress.gif",
+        "imagem": "uploads/legpress.gif",
         "tipo": "67e9ce55dd7caf7855799f83"
     }
 ]

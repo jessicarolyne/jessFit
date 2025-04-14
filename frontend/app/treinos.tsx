@@ -1,22 +1,27 @@
+import React from "react";
 import { LinearGradient } from 'expo-linear-gradient';
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, ScrollView } from 'react-native';
 import treinosData from '../data/treinos.json';
-import { router } from 'expo-router';
+import { useRouter } from "expo-router";
 
 const Treinos = () => {
-    // console.log(treinosData);
+    const router = useRouter();
     return (
         <LinearGradient
             colors={["#021123", "#021123"]}
             style={style.container}
         >
-            <Text style={style.titulo}>Seus treinos</Text>
-            {treinosData.map(treino => (
-                <TouchableOpacity onPress={() => { router.push('/exercicios') }} style={style.card}>
-                    <Text style={style.textCard}>{treino.nome}</Text>
-                    <Text style={style.data}>Criado em: { Intl.DateTimeFormat('pt-BR').format(new Date(treino.criadoEm)) }</Text>
-                </TouchableOpacity>
-            ))}
+            <ScrollView>
+                <View style={style.scrollList}>
+                    <Text style={style.titulo}>Seus treinos</Text>
+                    {treinosData.map((treino) => (
+                        <TouchableOpacity key={treino._id} onPress={() => { router.push('/exercicios') }} style={style.card}>
+                            <Text style={style.textCard}>{treino.nome}</Text>
+                            <Text style={style.data}>Criado em: {Intl.DateTimeFormat('pt-BR').format(new Date(treino.criadoEm))}</Text>
+                        </TouchableOpacity>
+                    ))}
+                </View>
+            </ScrollView>
         </LinearGradient>
     );
 }
@@ -26,8 +31,10 @@ const style = StyleSheet.create({
         flex: 1,
         paddingVertical: 60,
         paddingHorizontal: 20,
-        alignItems: 'center',
         gap: 20,
+    },
+    scrollList: {
+        gap: 20
     },
     titulo: {
         color: "#FFF",

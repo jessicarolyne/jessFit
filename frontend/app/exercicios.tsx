@@ -1,27 +1,28 @@
 import { LinearGradient } from 'expo-linear-gradient';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
 import exerciciosData from '../data/listaExercicios.json';
-// import FastImage from 'react-native-fast-image';
+
+const BASE_URL = "http://localhost:3000";
 
 const Exercicios = () => {
-    console.log(exerciciosData);
     return (
         <LinearGradient
             colors={["#021123", "#021123"]}
             style={style.container}
         >
-            <Text style={style.titulo}>Seus treinos</Text>
-            {exerciciosData.map(exercicio => (
-                <View style={style.card}>
-                    <Text style={style.textCard}>{exercicio.nome}</Text>
-                    <Image style={style.imagem} source={{ uri: exercicio.imagem }} />
-                    {/* <FastImage
-                        style={style.imagem}
-                        source={{uri: exercicio.imagem}}
-                        resizeMode={FastImage.resizeMode.contain}
-                    /> */}
+            <ScrollView>
+                <View style={style.scrollList}>
+                    <Text style={style.titulo}>Seus treinos</Text>
+                    {exerciciosData.map((exercicio) => (
+                        <View key={exercicio._id} style={style.card}>
+                            <Text style={style.textCard}>{exercicio.nome}</Text>
+                            <Image source={{ uri: `${BASE_URL}/${exercicio.imagem}` }}
+                                style={style.imagem}
+                                resizeMode="contain" />
+                        </View>
+                    ))}
                 </View>
-            ))}
+            </ScrollView>
         </LinearGradient>
     );
 }
@@ -31,19 +32,21 @@ const style = StyleSheet.create({
         flex: 1,
         paddingVertical: 60,
         paddingHorizontal: 20,
-        alignItems: 'center',
         gap: 20,
     },
     imagem: {
         objectFit: "contain",
-        width: 250,
-        height: 250
+        width: "100%",
+        height: 300,
     },
     titulo: {
         color: "#FFF",
         fontFamily: "Montserrat_700Bold",
         fontSize: 24,
         textTransform: 'uppercase'
+    },
+    scrollList: {
+        gap: 20,
     },
     card: {
         width: "100%",
